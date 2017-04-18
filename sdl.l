@@ -1,17 +1,9 @@
 (default
    *SDLlib "libSDL2-2.0.so.0")
 
-<<<<<<< HEAD
-;;some globals
 (de sdl-window 0)
 (de sdl-renderer 0)
 
-;init stuff
-=======
-(de sdl-window 0)
-(de sdl-renderer 0)
-
->>>>>>> 933456675d8875062018afa142efa8eef4d26b4c
 (def 'SDL_INIT_TIMER          (hex "00000001"))
 (def 'SDL_INIT_AUDIO          (hex "00000010"))
 (def 'SDL_INIT_VIDEO          (hex "00000020"))
@@ -22,37 +14,6 @@
 (def 'SDL_INIT_NOPARACHUTE    (hex "00100000"))
 (def 'SDL_INIT_EVERYTHING     (hex (+ SDL_INIT_TIMER SDL_INIT_AUDIO SDL_INIT_VIDEO SDL_INIT_EVENTS SDL_INIT_JOYSTICK SDL_INIT_HAPTIC SDL_INIT_GAMECONTROLLER)))
 
-<<<<<<< HEAD
-;;graphics stuff
-(def 'SDL_PIXELFORMAT_ARGB8888 372645892) ;; value taken via 	printf("SDL_PIXELFORMAT_ARGB8888 = %d\n", SDL_PIXELFORMAT_ARGB8888);
-(def 'SDL_TEXTUREACCESS_STREAMING 1) ;; 	printf("SDL_TEXTUREACCESS_STREAMING= %d\n", SDL_TEXTUREACCESS_STREAMING);
-
-
-;;event stuff
-
-(def 'SDL_KEYDOWN (hex 300))
-(def 'SDL_KEYUP (hex 301))
-
-(def 'SDL_MOUSEMOTION (hex 400))
-(def 'SDL_MOUSEBUTTONDOWN (hex 401))
-(def 'SDL_MOUSEBUTTONUP (hex 402))
-(def 'SDL_MOUSEWHEEL (hex 403))
-
-
-
-(de sdl-poll-event (event)
-   (native `*SDLlib "SDL_PollEvent" 'N event))
-
-(de sdl-create-texture (renderer width height)
-   (native `*SDLlib "SDL_CreateTexture" 'N renderer SDL_PIXELFORMAT_ARGB8888 SDL_TEXTUREACCESS_STREAMING width height) )
-
-(de sdl-update-texture (texture width height pixels pitch)
-   (native `*SDLlib "SDL_UpdateTexture" 'N texture  1 '(I . 4) (cons 0 0 width height) pixels pitch))
-
-
-;;functions
-=======
->>>>>>> 933456675d8875062018afa142efa8eef4d26b4c
 (de sdl-init (params)
    (native `*SDLlib "SDL_Init" 'I params) )
 
