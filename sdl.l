@@ -37,6 +37,15 @@
 (de sdl-create-texture (renderer width height)
    (native `*SDLlib "SDL_CreateTexture" 'N renderer SDL_PIXELFORMAT_ARGB8888 SDL_TEXTUREACCESS_STREAMING width height) )
 
+
+;;manipulate pixels in this way
+;;(setq p (native "@" "malloc" 'N (* width height)))
+;;loop over i from 0 to width*height*4
+;;(struct (+ p i) 'N '(value . 8)) ;write, i iterates plus 4 NOT 1
+;;(struct (+ p i) '(N))
+;;pixels is then p
+;;pitch is width * 4
+
 (de sdl-update-texture (texture width height pixels pitch)
    (native `*SDLlib "SDL_UpdateTexture" 'N texture  1 '(I . 4) (cons 0 0 width height) pixels pitch))
 
