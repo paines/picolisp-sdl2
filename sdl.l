@@ -16,8 +16,8 @@
 (def 'SDL_INIT_EVERYTHING     (hex (+ SDL_INIT_TIMER SDL_INIT_AUDIO SDL_INIT_VIDEO SDL_INIT_EVENTS SDL_INIT_JOYSTICK SDL_INIT_HAPTIC SDL_INIT_GAMECONTROLLER)))
 
 ;;graphics stuff
-(def 'SDL_PIXELFORMAT_ARGB8888 372645892) ;; value taken via 	printf("SDL_PIXELFORMAT_ARGB8888 = %d\n", SDL_PIXELFORMAT_ARGB8888);
-(def 'SDL_TEXTUREACCESS_STREAMING 1) ;; 	printf("SDL_TEXTUREACCESS_STREAMING= %d\n", SDL_TEXTUREACCESS_STREAMING);
+(def 'SDL_PIXELFORMAT_ARGB8888 372645892) 
+(def 'SDL_TEXTUREACCESS_STREAMING 1)
 
 ;;event stuff
 
@@ -37,14 +37,6 @@
 (de sdl-create-texture (renderer width height)
    (native `*SDLlib "SDL_CreateTexture" 'N renderer SDL_PIXELFORMAT_ARGB8888 SDL_TEXTUREACCESS_STREAMING width height) )
 
-
-;;manipulate pixels in this way
-;;(setq p (native "@" "malloc" 'N (* width height)))
-;;loop over i from 0 to width*height*4
-;;(struct (+ p i) 'N '(value . 8)) ;write, i iterates plus 4 NOT 1
-;;(struct (+ p i) '(N))
-;;pixels is then p
-;;pitch is width * 4
 
 (de sdl-update-texture (texture width height pixels pitch)
    (native `*SDLlib "SDL_UpdateTexture" 'N texture '(0 0 width height) pixels pitch))
