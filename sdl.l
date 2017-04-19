@@ -47,7 +47,7 @@
 ;;pitch is width * 4
 
 (de sdl-update-texture (texture width height pixels pitch)
-   (native `*SDLlib "SDL_UpdateTexture" 'N texture  1 '(I . 4) (cons 0 0 width height) pixels pitch))
+   (native `*SDLlib "SDL_UpdateTexture" 'N texture '(0 0 width height) pixels pitch))
 
 
 ;;functions
@@ -74,3 +74,18 @@
 
 (de sdl-quit ()
    (native `*SDLlib "SDL_Quit" 'N))
+
+(de sdl-delay (val)
+   (native `*SDLlib "SDL_Delay" 'N val))
+
+(de sdl-render-clear (renderer)
+   (native `*SDLlib "SDL_RenderClear" 'N renderer) )
+
+(de sdl-render-copy (renderer tex width0 height0 width1 height1 )
+   (native `*SDLlib "SDL_RenderCopy" 'N renderer tex '(0 0 width0 height0) '(0 0 width1 height1)))
+
+(de sdl-render-present (renderer)
+   (native `*SDLlib "SDL_RenderPresent" 'N renderer) )
+
+(de sdl-destroy-texture (tex)
+   (native `*SDLlib "SDL_DestroyTexture" 'N tex))
