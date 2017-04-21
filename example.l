@@ -22,7 +22,7 @@
       (sdl-destroy-texture tex) ) )
 
 
-
+#actually, we do not ever reach this point atm
 (sdl-delay 4000)
 (sdl-quit)
 (bye)
