@@ -29,20 +29,8 @@
 (def 'SDL_MOUSEBUTTONUP (hex 402))
 (def 'SDL_MOUSEWHEEL (hex 403))
 
-
-
-(de sdl-poll-event (event)
-   (native `*SDLlib "SDL_PollEvent" 'N event))
-
-(de sdl-create-texture (renderer width height)
-   (native `*SDLlib "SDL_CreateTexture" 'N renderer SDL_PIXELFORMAT_ARGB8888 SDL_TEXTUREACCESS_STREAMING width height) )
-
-
-(de sdl-update-texture (texture width height pixels pitch)
-   (native `*SDLlib "SDL_UpdateTexture" 'N texture '(0 0 width height) pixels pitch))
-
-
 ;;functions
+
 (de sdl-init (params)
    (native `*SDLlib "SDL_Init" 'I params) )
 
@@ -55,7 +43,7 @@
 (de sdl-create-window-and-renderer (width height)
    ;SDL_Window window
    (setq sdl-window (native `*SDLlib "SDL_CreateWindow" 'N "PicoLisp SDL2" 0 0 width height 0))
-   (setq sdl-renderer (native `*SDLlib "SDL_CreateRenderer" 'N sdl-window -1 0))
+   (setq sdl-renderer (native `*SDLlib "SDL_CreateRenderer" 'N sdl-window 0 0))
    (sdl-show-window sdl-window))
 
 (de sdl-destroy-renderer (renderer)
@@ -73,11 +61,31 @@
 (de sdl-render-clear (renderer)
    (native `*SDLlib "SDL_RenderClear" 'N renderer) )
 
+(de sdl-create-texture (renderer width height)
+   (native `*SDLlib "SDL_CreateTexture" 'N renderer SDL_PIXELFORMAT_ARGB8888 SDL_TEXTUREACCESS_STREAMING width height) )
+
+(de sdl-update-texture (texture width height pixels pitch)
+    (native `*SDLlib "SDL_UpdateTexture" 'N texture (list NIL (16) (cons 0 4) (cons 0 4) (cons width 4) (cons height 4)) pixels pitch))
+    #(native `*SDLlib "SDL_UpdateTexture" 'N texture NIL pixels pitch))
+
 (de sdl-render-copy (renderer tex width0 height0 width1 height1 )
-   (native `*SDLlib "SDL_RenderCopy" 'N renderer tex '(0 0 width0 height0) '(0 0 width1 height1)))
+   #(native `*SDLlib "SDL_RenderCopy" 'N renderer tex NIL NIL))
+   (native `*SDLlib "SDL_RenderCopy" 'N renderer tex
+      (list NIL (16) (cons 0 4) (cons 0 4) (cons width0 4) (cons height0 4))
+      (list NIL (16) (cons 0 4) (cons 0 4) (cons width1 4) (cons height1 4))))
 
 (de sdl-render-present (renderer)
    (native `*SDLlib "SDL_RenderPresent" 'N renderer) )
 
 (de sdl-destroy-texture (tex)
    (native `*SDLlib "SDL_DestroyTexture" 'N tex))
+
+(de sdl-poll-event (event)
+   (native `*SDLlib "SDL_PollEvent" 'N event))
+
+(de sdl-set-render-draw-color (renderer r g b a)
+	(native `*SDLlib "SDL_SetRenderDrawColor" 'N renderer r g b a))
+
+(de sdl-render-draw-point (renderer x y)
+	(native `*SDLlib "SDL_RenderDrawPoint" 'N renderer x y))
+
