@@ -5,9 +5,12 @@ PicoLisp SDL2 Bindings
 minimal SDL2 library for PicoLisp
 
 what works: not much!
-  - a short example show the initialization and rendering of an buffer to a texture which is blitted to the renderer 
-  - we need events!!!
+  - a short rudimentary example which shows the initialization and rendering of an buffer to a texture which is blitted to the     renderer 
   
 
+To do:
+  -Cleanup and give variables and namnes uppercase characters
+  -Events!!!
 
-Shoutout to: All from freenode/#picolisp, especially Regenaxer for support and advice!
+
+Shoutouts to: All from freenode/#picolisp, especially Regenaxer for support and advice!
