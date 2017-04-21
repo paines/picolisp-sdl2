@@ -9,8 +9,9 @@ what works: not much!
   
 
 To do:
-  -Cleanup and give variables and namnes uppercase characters
-  -Events!!!
+  -Cleanup and give variables and names uppercase characters
+  -Example: pixel loop should be changed to a lisp list and then converted to an array, maybe via some library function
+  -Events, this is a though one, because it is all about structures
 
 
 Shoutouts to: All from freenode/#picolisp, especially Regenaxer for support and advice!
