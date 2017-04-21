@@ -66,10 +66,8 @@
 
 (de sdl-update-texture (texture width height pixels pitch)
     (native `*SDLlib "SDL_UpdateTexture" 'N texture (list NIL (16) (cons 0 4) (cons 0 4) (cons width 4) (cons height 4)) pixels pitch))
-    #(native `*SDLlib "SDL_UpdateTexture" 'N texture NIL pixels pitch))
 
 (de sdl-render-copy (renderer tex width0 height0 width1 height1 )
-   #(native `*SDLlib "SDL_RenderCopy" 'N renderer tex NIL NIL))
    (native `*SDLlib "SDL_RenderCopy" 'N renderer tex
       (list NIL (16) (cons 0 4) (cons 0 4) (cons width0 4) (cons height0 4))
       (list NIL (16) (cons 0 4) (cons 0 4) (cons width1 4) (cons height1 4))))
@@ -78,7 +76,7 @@
    (native `*SDLlib "SDL_RenderPresent" 'N renderer) )
 
 (de sdl-destroy-texture (tex)
-   (native `*SDLlib "SDL_DestroyTexture" 'N tex))
+   (native `*SDLlib "SDL_DestroyTexture" NIL tex))
 
 (de sdl-poll-event (event)
    (native `*SDLlib "SDL_PollEvent" 'N event))
